@@ -428,70 +428,73 @@ https://templatemo.com/tm-562-space-dynamic
       });
     }
     
+ 
+  </script>
+    <script>
+      function isAppInstalled() {
+        return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+      }
+  
+      if (isAppInstalled()) {
+        console.log('O aplicativo já está instalado');
+      } else {
+        console.log('O aplicativo não está instalado');
+        // Verificar permissão para notificações
+        if (Notification.permission === 'granted') {
+          showInstallNotification();
+        } else if (Notification.permission !== 'denied') {
+          Notification.requestPermission().then(permission => {
+            if (permission === 'granted') {
+              showInstallNotification();
+            }
+          });
+        }
+      }
+  
+      // Função para mostrar a notificação de instalação
+      function showInstallNotification() {
+        const options = {
+          body: 'Clique aqui para instalar o aplicativo do Supermercado Nayara.',
+          icon: 'assets/images/icon-192x192.png',
+          vibrate: [200, 100, 200],
+          tag: 'install-app'
+        };
+  
+        const notification = new Notification('Instalar Supermercado Nayara', options);
+  
+        notification.onclick = () => {
+          // Mostrar o prompt de instalação
+          if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+              if (choiceResult.outcome === 'accepted') {
+                console.log('Usuário aceitou instalar o app');
+              } else {
+                console.log('Usuário rejeitou a instalação');
+              }
+              deferredPrompt = null;
+            });
+          }
+        };
+      }
+    </script>
+      <!-- Service Worker and Install Prompt Logic -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(reg => console.log('Service Worker registrado!', reg))
+          .catch(err => console.error('Service Worker registration falhou!', err));
+      });
+    }
+
     let deferredPrompt;
 
-window.addEventListener('beforeinstallprompt', (event) => {
-  event.preventDefault();
-  deferredPrompt = event;
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-  // Pedir permissão para notificações
-  if (!window.Notification) {
-    console.log('Notificações não suportadas');
-  } else if (Notification.permission !== 'granted') {
-    Notification.requestPermission().then(permission => {
-      if (permission === 'granted') {
-        console.log('Permissão para notificações concedida');
-      } else {
-        console.log('Permissão para notificações negada');
-      }
+    window.addEventListener('beforeinstallprompt', (event) => {
+      event.preventDefault();
+      deferredPrompt = event;
     });
-  }
-
-  // Pedir permissão para instalação do aplicativo
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/service-worker.js')
-        .then(reg => {
-          console.log('Service Worker registrado');
-          // Verificar se o usuário já tem o aplicativo instalado
-          if (navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
-            console.log('Usuário já tem o aplicativo instalado');
-          } else {
-            // Exibir prompt de instalação se o usuário não tem o aplicativo instalado
-            showInstallPrompt();
-          }
-        })
-        .catch(err => console.error('Erro ao registrar Service Worker:', err));
-    });
-  }
-});
-
-function showInstallPrompt() {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-  } else {
-    const notification = new Notification('Instalar como aplicativo', {
-      body: 'Clique aqui para instalar o aplicativo',
-      icon: 'assets/images/icon.png',
-    });
-
-    notification.onclick = () => {
-      // Instalar o aplicativo
-      window.open('https://mercadinhoze.catalog.kyte.site/', '_blank');
-    };
-  }
-}
-
-// Verificar se o usuário já tem o aplicativo instalado
-if (navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
-  console.log('Usuário já tem o aplicativo instalado');
-} else {
-  // Exibir prompt de instalação se o usuário não tem o aplicativo instalado
-  showInstallPrompt();
-}
   </script>
-  
+
 </body>
 </html>
