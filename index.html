@@ -15,6 +15,8 @@
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
     <link rel="stylesheet" href="assets/css/fontawesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-space-dynamic.css">
     <link rel="stylesheet" href="assets/css/animated.css">
@@ -426,73 +428,60 @@ https://templatemo.com/tm-562-space-dynamic
       });
     }
     
- 
-  </script>
-    <script>
-      let deferredPrompt;
-
-// Registrar Service Worker
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
-            .then(reg => console.log('Service Worker registrado!', reg))
-            .catch(err => console.error('Service Worker registration falhou!', err));
-    });
-}
-
-// Verificar se o app já está instalado
-function isAppInstalled() {
-    return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
-}
-
-if (!isAppInstalled()) {
-    console.log('O aplicativo não está instalado');
-
-    // Escutar o evento beforeinstallprompt
     window.addEventListener('beforeinstallprompt', (event) => {
-        event.preventDefault();
-        deferredPrompt = event;
-
-        // Verificar permissão para notificações
-        if (Notification.permission === 'granted') {
-            showInstallNotification();
-        } else if (Notification.permission !== 'denied') {
-            Notification.requestPermission().then(permission => {
-                if (permission === 'granted') {
-                    showInstallNotification();
-                }
-            });
-        }
+      event.preventDefault();
+      let deferredPrompt = event;
+      deferredPrompt.prompt();
     });
-}
+    document.addEventListener('DOMContentLoaded', function() {
+  // Pedir permissão para notificações
+  if (!window.Notification) {
+    console.log('Notificações não suportadas');
+  } else if (Notification.permission !== 'granted') {
+    Notification.requestPermission().then(permission => {
+      if (permission === 'granted') {
+        console.log('Permissão para notificações concedida');
+      } else {
+        console.log('Permissão para notificações negada');
+      }
+    });
+  }
 
-// Função para exibir notificação de instalação
-function showInstallNotification() {
-    const options = {
-        body: 'Clique aqui para instalar o aplicativo do Supermercado Nayara.',
-        icon: 'assets/images/icon-192x192.png',
-        vibrate: [200, 100, 200],
-        tag: 'install-app'
-    };
+  // Pedir permissão para instalação do aplicativo
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then(reg => console.log('Service Worker registrado'))
+        .catch(err => console.error('Erro ao registrar Service Worker:', err));
+    });
+  }
 
-    const notification = new Notification('Instalar Supermercado Nayara', options);
+  // Pedir permissão para geolocalização
+  if ('geolocation' in navigator) {
+    navigator.geolocation.getCurrentPosition(position => {
+      console.log('Geolocalização concedida');
+    }, error => {
+      console.log('Geolocalização negada');
+    });
+  }
 
-    notification.onclick = () => {
-        // Mostrar o prompt de instalação quando o usuário clicar na notificação
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            deferredPrompt.userChoice.then((choiceResult) => {
-                if (choiceResult.outcome === 'accepted') {
-                    console.log('Usuário aceitou instalar o app');
-                } else {
-                    console.log('Usuário rejeitou a instalação');
-                }
-                deferredPrompt = null;
-            });
-        }
-    };
-}
+  // Pedir permissão para acesso ao microfone e câmera
+  if ('mediaDevices' in navigator) {
+    navigator.mediaDevices.getUserMedia({ audio: true, video: true })
+      .then(stream => {
+        console.log('Acesso ao microfone e câmera concedido');
+      })
+      .catch(error => {
+        console.log('Acesso ao microfone e câmera negado');
+      });
+  }
+});
+
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault();
+  deferredPrompt = event;
+});
   </script>
-
+  
 </body>
 </html>
