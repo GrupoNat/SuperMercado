@@ -433,51 +433,49 @@ https://templatemo.com/tm-562-space-dynamic
       let deferredPrompt = event;
       deferredPrompt.prompt();
     });
-    let deferredPrompt;
-
-window.addEventListener('beforeinstallprompt', (event) => {
-  event.preventDefault();
-  deferredPrompt = event;
-  showInstallNotification();
-});
-
-function showInstallNotification() {
+    document.addEventListener('DOMContentLoaded', function() {
+  // Pedir permissão para notificações
   if (!window.Notification) {
     console.log('Notificações não suportadas');
-    return;
-  }
-
-  if (Notification.permission === 'granted') {
-    showInstallPrompt();
-  } else if (Notification.permission !== 'denied') {
+  } else if (Notification.permission !== 'granted') {
     Notification.requestPermission().then(permission => {
       if (permission === 'granted') {
-        showInstallPrompt();
+        console.log('Permissão para notificações concedida');
+      } else {
+        console.log('Permissão para notificações negada');
       }
     });
   }
-}
 
-function showInstallPrompt() {
-  const notification = new Notification('Instalar como aplicativo', {
-    body: 'Clique aqui para instalar o aplicativo',
-    icon: 'assets/images/icon.png',
-  });
+  // Pedir permissão para instalação do aplicativo
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then(reg => console.log('Service Worker registrado'))
+        .catch(err => console.error('Erro ao registrar Service Worker:', err));
+    });
+  }
 
-  notification.onclick = () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice
-        .then((choiceResult) => {
-          if (choiceResult.outcome === 'accepted') {
-            console.log('Usuário aceitou a instalação do PWA');
-          } else {
-            console.log('Usuário recusou a instalação do PWA');
-          }
-        });
-    }
-  };
-}
+  // Pedir permissão para geolocalização
+  if ('geolocation' in navigator) {
+    navigator.geolocation.getCurrentPosition(position => {
+      console.log('Geolocalização concedida');
+    }, error => {
+      console.log('Geolocalização negada');
+    });
+  }
+
+  // Pedir permissão para acesso ao microfone e câmera
+  if ('mediaDevices' in navigator) {
+    navigator.mediaDevices.getUserMedia({ audio: true, video: true })
+      .then(stream => {
+        console.log('Acesso ao microfone e câmera concedido');
+      })
+      .catch(error => {
+        console.log('Acesso ao microfone e câmera negado');
+      });
+  }
+});
 
 window.addEventListener('beforeinstallprompt', (event) => {
   event.preventDefault();
