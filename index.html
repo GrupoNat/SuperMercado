@@ -433,7 +433,6 @@ https://templatemo.com/tm-562-space-dynamic
 window.addEventListener('beforeinstallprompt', (event) => {
   event.preventDefault();
   deferredPrompt = event;
-  showInstallPrompt();
 });
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -456,6 +455,13 @@ document.addEventListener('DOMContentLoaded', function() {
       navigator.serviceWorker.register('/service-worker.js')
         .then(reg => {
           console.log('Service Worker registrado');
+          // Verificar se o usuário já tem o aplicativo instalado
+          if (reg.installing || reg.waiting || reg.active) {
+            console.log('Usuário já tem o aplicativo instalado');
+          } else {
+            // Exibir prompt de instalação se o usuário não tem o aplicativo instalado
+            showInstallPrompt();
+          }
         })
         .catch(err => console.error('Erro ao registrar Service Worker:', err));
     });
