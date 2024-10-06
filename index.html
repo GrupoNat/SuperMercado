@@ -420,7 +420,7 @@ https://templatemo.com/tm-562-space-dynamic
   <script src="assets/js/imagesloaded.js"></script>
   <script src="assets/js/templatemo-custom.js"></script>
   <script>
-    if ('serviceWorker' in navigator) {
+   if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/service-worker.js')
       .then(reg => {
@@ -448,12 +448,22 @@ function toggleInstallButton() {
 
 let deferredPrompt;
 
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+});
+
 document.getElementById('install-button').addEventListener('click', () => {
-  if (window.serviceWorkerRegistration) {
-    window.serviceWorkerRegistration.addEventListener('beforeinstallprompt', (e) => {
-      deferredPrompt = e;
-      deferredPrompt.prompt();
-    });
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice
+      .then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('Usuário aceitou a instalação do aplicativo');
+        } else {
+          console.log('Usuário recusou a instalação do aplicativo');
+        }
+      });
   }
 });
 
