@@ -438,20 +438,33 @@ https://templatemo.com/tm-562-space-dynamic
 window.addEventListener('beforeinstallprompt', (event) => {
   event.preventDefault();
   deferredPrompt = event;
-  const installButton = document.getElementById('install-button');
-  installButton.style.display = 'block';
+  showInstallNotification();
 });
 
-window.addEventListener('appinstalled', () => {
-  const installButton = document.getElementById('install-button');
-  installButton.style.display = 'none';
-});
+function showInstallNotification() {
+  if (!window.Notification) {
+    console.log('Notificações não suportadas');
+    return;
+  }
 
-document.addEventListener('DOMContentLoaded', function() {
-  const installButton = document.getElementById('install-button');
-  installButton.style.display = 'none';
+  if (Notification.permission === 'granted') {
+    showInstallPrompt();
+  } else if (Notification.permission !== 'denied') {
+    Notification.requestPermission().then(permission => {
+      if (permission === 'granted') {
+        showInstallPrompt();
+      }
+    });
+  }
+}
 
-  installButton.addEventListener('click', () => {
+function showInstallPrompt() {
+  const notification = new Notification('Instalar como aplicativo', {
+    body: 'Clique aqui para instalar o aplicativo',
+    icon: 'assets/images/icon.png',
+  });
+
+  notification.onclick = () => {
     if (deferredPrompt) {
       deferredPrompt.prompt();
       deferredPrompt.userChoice
@@ -463,8 +476,8 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         });
     }
-  });
-});
+  };
+}
 
 window.addEventListener('beforeinstallprompt', (event) => {
   event.preventDefault();
