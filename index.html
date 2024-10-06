@@ -459,8 +459,13 @@ document.addEventListener('DOMContentLoaded', function() {
           if (reg.installing || reg.waiting || reg.active) {
             console.log('Usuário já tem o aplicativo instalado');
           } else {
-            // Exibir prompt de instalação se o usuário não tem o aplicativo instalado
-            showInstallPrompt();
+            // Verificar se o usuário já tem o aplicativo instalado
+            if (navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
+              console.log('Usuário já tem o aplicativo instalado');
+            } else {
+              // Exibir prompt de instalação se o usuário não tem o aplicativo instalado
+              showInstallPrompt();
+            }
           }
         })
         .catch(err => console.error('Erro ao registrar Service Worker:', err));
