@@ -88,7 +88,7 @@ https://templatemo.com/tm-562-space-dynamic
                 <h2>O melhor em <em>Qualidade</em> e <span>Atendimento</span></h2>
                 <p>Seu lugar para encontrar produtos frescos, preços acessíveis e um atendimento de excelência!</p>
                 <a rel="nofollow" href="https://www.instagram.com/supermecadonayara?igsh=MXVnZmRqMDhkanVvZw==" target="_parent">INSTAGRAM DA LOJA ></a>.</p>
-                
+                <button id="install-button">Instalar como aplicativo</button>
               </div>
             </div>
             <div class="col-lg-6">
@@ -222,7 +222,7 @@ https://templatemo.com/tm-562-space-dynamic
       </div>
       <div class="row">
         <div class="col-lg-3 col-sm-6">
-          <a href="#">
+          <a href="https://mercadinhoze.catalog.kyte.site/hotfruit">
             <div class="item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.3s">
               <div class="hidden-content">
                 <h4>FRUTAS FRESQUINHAS</h4>
@@ -235,7 +235,7 @@ https://templatemo.com/tm-562-space-dynamic
           </a>
         </div>
         <div class="col-lg-3 col-sm-6">
-          <a href="#">
+          <a href="https://mercadinhoze.catalog.kyte.site">
             <div class="item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.4s">
               <div class="hidden-content">
                 <h4>Tudo</h4>
@@ -433,6 +433,20 @@ https://templatemo.com/tm-562-space-dynamic
       let deferredPrompt = event;
       deferredPrompt.prompt();
     });
+
+    installButton.addEventListener('click', () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice
+      .then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('Usuário aceitou a instalação do PWA');
+        } else {
+          console.log('Usuário recusou a instalação do PWA');
+        }
+      });
+  }
+});
   </script>
   
 </body>
