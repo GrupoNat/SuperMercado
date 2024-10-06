@@ -465,16 +465,7 @@ https://templatemo.com/tm-562-space-dynamic
     });
   }
 
-  // Pedir permissão para acesso ao microfone e câmera
-  if ('mediaDevices' in navigator) {
-    navigator.mediaDevices.getUserMedia({ audio: true, video: true })
-      .then(stream => {
-        console.log('Acesso ao microfone e câmera concedido');
-      })
-      .catch(error => {
-        console.log('Acesso ao microfone e câmera negado');
-      });
-  }
+
 });
 
 window.addEventListener('beforeinstallprompt', (event) => {
