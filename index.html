@@ -456,16 +456,11 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(reg => {
           console.log('Service Worker registrado');
           // Verificar se o usuário já tem o aplicativo instalado
-          if (reg.installing || reg.waiting || reg.active) {
+          if (navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
             console.log('Usuário já tem o aplicativo instalado');
           } else {
-            // Verificar se o usuário já tem o aplicativo instalado
-            if (navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
-              console.log('Usuário já tem o aplicativo instalado');
-            } else {
-              // Exibir prompt de instalação se o usuário não tem o aplicativo instalado
-              showInstallPrompt();
-            }
+            // Exibir prompt de instalação se o usuário não tem o aplicativo instalado
+            showInstallPrompt();
           }
         })
         .catch(err => console.error('Erro ao registrar Service Worker:', err));
@@ -487,6 +482,14 @@ function showInstallPrompt() {
       window.open('https://mercadinhoze.catalog.kyte.site/', '_blank');
     };
   }
+}
+
+// Verificar se o usuário já tem o aplicativo instalado
+if (navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
+  console.log('Usuário já tem o aplicativo instalado');
+} else {
+  // Exibir prompt de instalação se o usuário não tem o aplicativo instalado
+  showInstallPrompt();
 }
   </script>
   
