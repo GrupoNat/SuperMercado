@@ -428,12 +428,15 @@ https://templatemo.com/tm-562-space-dynamic
       });
     }
     
-    window.addEventListener('beforeinstallprompt', (event) => {
-      event.preventDefault();
-      let deferredPrompt = event;
-      deferredPrompt.prompt();
-    });
-    document.addEventListener('DOMContentLoaded', function() {
+    let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault();
+  deferredPrompt = event;
+  showInstallPrompt();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
   // Pedir permissão para notificações
   if (!window.Notification) {
     console.log('Notificações não suportadas');
@@ -453,11 +456,6 @@ https://templatemo.com/tm-562-space-dynamic
       navigator.serviceWorker.register('/service-worker.js')
         .then(reg => {
           console.log('Service Worker registrado');
-          // Pedir permissão para instalação do aplicativo
-          window.addEventListener('beforeinstallprompt', (event) => {
-            event.preventDefault();
-            showInstallPrompt();
-          });
         })
         .catch(err => console.error('Erro ao registrar Service Worker:', err));
     });
@@ -465,21 +463,20 @@ https://templatemo.com/tm-562-space-dynamic
 });
 
 function showInstallPrompt() {
-  const notification = new Notification('Instalar como aplicativo', {
-    body: 'Clique aqui para instalar o aplicativo',
-    icon: 'assets/images/icon.png',
-  });
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+  } else {
+    const notification = new Notification('Instalar como aplicativo', {
+      body: 'Clique aqui para instalar o aplicativo',
+      icon: 'assets/images/icon.png',
+    });
 
-  notification.onclick = () => {
-    // Instalar o aplicativo
-    window.open('https://mercadinhoze.catalog.kyte.site/', '_blank');
-  };
+    notification.onclick = () => {
+      // Instalar o aplicativo
+      window.open('https://mercadinhoze.catalog.kyte.site/', '_blank');
+    };
+  }
 }
-
-window.addEventListener('beforeinstallprompt', (event) => {
-  event.preventDefault();
-  deferredPrompt = event;
-});
   </script>
   
 </body>
