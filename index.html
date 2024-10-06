@@ -461,7 +461,7 @@ document.getElementById('install-button').addEventListener('click', () => {
       .then((choiceResult) => {
         if (choiceResult.outcome === 'accepted') {
           console.log('Usuário aceitou a instalação do aplicativo');
-          toggleInstallButton(); // Esconde o botão após a instalação
+          window.location.reload(); // Recarrega a página após a instalação
         } else {
           console.log('Usuário recusou a instalação do aplicativo');
         }
