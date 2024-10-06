@@ -421,14 +421,17 @@ https://templatemo.com/tm-562-space-dynamic
   <script src="assets/js/templatemo-custom.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
-          .then(reg => console.log('Service Worker registered!', reg))
-          .catch(err => console.error('Service Worker registration failed!', err));
-      });
-    }
-    
-  // Verifica se o usuário já tem o aplicativo instalado
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(reg => {
+        console.log('Service Worker registered!', reg);
+        window.serviceWorkerRegistration = reg;
+      })
+      .catch(err => console.error('Service Worker registration failed!', err));
+  });
+}
+
+// Verifica se o usuário já tem o aplicativo instalado
 function isAppInstalled() {
   return window.matchMedia('(display-mode: standalone)').matches;
 }
@@ -443,20 +446,14 @@ function toggleInstallButton() {
   }
 }
 
-// Adiciona evento de click ao botão de instalação
+let deferredPrompt;
+
 document.getElementById('install-button').addEventListener('click', () => {
-  // Verifica se o navegador suporta a instalação de PWA
-  if ('serviceWorker' in navigator) {
-    // Registra o service worker
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(reg => {
-        // Verifica se o usuário já tem o aplicativo instalado
-        if (!isAppInstalled()) {
-          // Mostra a janela de instalação
-          reg.showInstallPrompt();
-        }
-      })
-      .catch(err => console.error('Erro ao registrar o service worker:', err));
+  if (window.serviceWorkerRegistration) {
+    window.serviceWorkerRegistration.addEventListener('beforeinstallprompt', (e) => {
+      deferredPrompt = e;
+      deferredPrompt.prompt();
+    });
   }
 });
 
