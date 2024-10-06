@@ -429,69 +429,69 @@ https://templatemo.com/tm-562-space-dynamic
  
   </script>
     <script>
-      function isAppInstalled() {
-        return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
-      }
-  
-      if (isAppInstalled()) {
-        console.log('O aplicativo já está instalado');
-      } else {
-        console.log('O aplicativo não está instalado');
+      let deferredPrompt;
+
+// Registrar Service Worker
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then(reg => console.log('Service Worker registrado!', reg))
+            .catch(err => console.error('Service Worker registration falhou!', err));
+    });
+}
+
+// Verificar se o app já está instalado
+function isAppInstalled() {
+    return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+}
+
+if (!isAppInstalled()) {
+    console.log('O aplicativo não está instalado');
+
+    // Escutar o evento beforeinstallprompt
+    window.addEventListener('beforeinstallprompt', (event) => {
+        event.preventDefault();
+        deferredPrompt = event;
+
         // Verificar permissão para notificações
         if (Notification.permission === 'granted') {
-          showInstallNotification();
+            showInstallNotification();
         } else if (Notification.permission !== 'denied') {
-          Notification.requestPermission().then(permission => {
-            if (permission === 'granted') {
-              showInstallNotification();
-            }
-          });
+            Notification.requestPermission().then(permission => {
+                if (permission === 'granted') {
+                    showInstallNotification();
+                }
+            });
         }
-      }
-  
-      // Função para mostrar a notificação de instalação
-      function showInstallNotification() {
-        const options = {
-          body: 'Clique aqui para instalar o aplicativo do Supermercado Nayara.',
-          icon: 'assets/images/icon-192x192.png',
-          vibrate: [200, 100, 200],
-          tag: 'install-app'
-        };
-  
-        const notification = new Notification('Instalar Supermercado Nayara', options);
-  
-        notification.onclick = () => {
-          // Mostrar o prompt de instalação
-          if (deferredPrompt) {
+    });
+}
+
+// Função para exibir notificação de instalação
+function showInstallNotification() {
+    const options = {
+        body: 'Clique aqui para instalar o aplicativo do Supermercado Nayara.',
+        icon: 'assets/images/icon-192x192.png',
+        vibrate: [200, 100, 200],
+        tag: 'install-app'
+    };
+
+    const notification = new Notification('Instalar Supermercado Nayara', options);
+
+    notification.onclick = () => {
+        // Mostrar o prompt de instalação quando o usuário clicar na notificação
+        if (deferredPrompt) {
             deferredPrompt.prompt();
             deferredPrompt.userChoice.then((choiceResult) => {
-              if (choiceResult.outcome === 'accepted') {
-                console.log('Usuário aceitou instalar o app');
-              } else {
-                console.log('Usuário rejeitou a instalação');
-              }
-              deferredPrompt = null;
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('Usuário aceitou instalar o app');
+                } else {
+                    console.log('Usuário rejeitou a instalação');
+                }
+                deferredPrompt = null;
             });
-          }
-        };
-      }
-    </script>
-      <!-- Service Worker and Install Prompt Logic -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
-          .then(reg => console.log('Service Worker registrado!', reg))
-          .catch(err => console.error('Service Worker registration falhou!', err));
-      });
-    }
-
-    let deferredPrompt;
-
-    window.addEventListener('beforeinstallprompt', (event) => {
-      event.preventDefault();
-      deferredPrompt = event;
-    });
+        }
+    };
+}
   </script>
 
 </body>
