@@ -451,31 +451,30 @@ https://templatemo.com/tm-562-space-dynamic
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/service-worker.js')
-        .then(reg => console.log('Service Worker registrado'))
+        .then(reg => {
+          console.log('Service Worker registrado');
+          // Pedir permissão para instalação do aplicativo
+          window.addEventListener('beforeinstallprompt', (event) => {
+            event.preventDefault();
+            showInstallPrompt();
+          });
+        })
         .catch(err => console.error('Erro ao registrar Service Worker:', err));
     });
   }
-
-  // Pedir permissão para geolocalização
-  if ('geolocation' in navigator) {
-    navigator.geolocation.getCurrentPosition(position => {
-      console.log('Geolocalização concedida');
-    }, error => {
-      console.log('Geolocalização negada');
-    });
-  }
-
-  // Pedir permissão para acesso ao microfone e câmera
-  if ('mediaDevices' in navigator) {
-    navigator.mediaDevices.getUserMedia({ audio: true, video: true })
-      .then(stream => {
-        console.log('Acesso ao microfone e câmera concedido');
-      })
-      .catch(error => {
-        console.log('Acesso ao microfone e câmera negado');
-      });
-  }
 });
+
+function showInstallPrompt() {
+  const notification = new Notification('Instalar como aplicativo', {
+    body: 'Clique aqui para instalar o aplicativo',
+    icon: 'assets/images/icon.png',
+  });
+
+  notification.onclick = () => {
+    // Instalar o aplicativo
+    window.open('https://mercadinhoze.catalog.kyte.site/', '_blank');
+  };
+}
 
 window.addEventListener('beforeinstallprompt', (event) => {
   event.preventDefault();
