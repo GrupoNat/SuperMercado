@@ -305,13 +305,17 @@ https://templatemo.com/tm-562-space-dynamic
                 <a href="#"><h4>PROMOÇAO DE CARNE</h4></a>
                 <p>Lorem ipsum dolor sit amet, consectetur and sed doer ket eismod tempor incididunt ut labore et dolore magna...</p>
                 <div class="main-blue-button">
-                  <a href="#" id="journal-button">JORNAL DO DIA</a>
+                  <a  id="journal-button">JORNAL DO DIA</a>
                 </div>
                 
-                <!-- Adicione um contêiner para a imagem em tela inteira -->
-                <div id="full-screen-image-container" style="display: none;">
-                  <img src="assets/images/your-image-url.jpeg" id="full-screen-image" />
+                <!-- Modal (inicialmente oculto) -->
+                <div id="journalModal" class="modal">
+                  <span class="close">&times;</span>
+                  <img class="modal-content" id="journalImage">
+                  <div id="caption"></div>
                 </div>
+                <!-- Adicione um contêiner para a imagem em tela inteira -->
+                
               </div>
             </div>
           </div>
@@ -481,24 +485,94 @@ toggleInstallButton();
 window.addEventListener('visibilitychange', () => {
   toggleInstallButton();
 });
+var modal = document.getElementById("journalModal");
 
-const journalButton = document.getElementById('journal-button');
-  const fullScreenImageContainer = document.getElementById('full-screen-image-container');
+// Obtendo a imagem e o elemento de legenda
+var modalImg = document.getElementById("journalImage");
+var captionText = document.getElementById("caption");
 
-  journalButton.addEventListener('click', (event) => {
-    event.preventDefault();
-    fullScreenImageContainer.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-  });
+// Botão de clique para abrir o modal
+var btn = document.getElementById("journal-button");
 
-  // Adicione um evento para fechar a imagem em tela inteira quando o usuário clica fora
-  document.addEventListener('click', (event) => {
-    if (!fullScreenImageContainer.contains(event.target)) {
-      fullScreenImageContainer.style.display = 'none';
-      document.body.style.overflow = 'auto';
-    }
-  });
+// Quando o usuário clicar no botão, abra o modal e mostre a imagem
+btn.onclick = function() {
+  modal.style.display = "block";
+  modalImg.src = "assets/images/jornal-promocoes.jpeg"; // Caminho para a imagem do jornal
+  captionText.innerHTML = "Jornal de Promoções do Supermercado Nayara";
+}
+
+// Fechar o modal quando clicar no botão "X"
+var span = document.getElementsByClassName("close")[0];
+span.onclick = function() {
+  modal.style.display = "none";
+}
   </script>
   
 </body>
+<!-- Botão "JORNAL DO DIA" -->
+<div class="main-blue-button">
+  <a href="#" id="journal-button">JORNAL DO DIA</a>
+</div>
+
+<!-- Modal (inicialmente oculto) -->
+<div id="journalModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="journalImage">
+  <div id="caption"></div>
+</div>
+
+<!-- CSS para o modal -->
+<style>
+  /* O Modal (fundo) */
+  .modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    padding-top: 60px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.9); 
+  }
+
+  /* Imagem dentro do modal */
+  .modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+  }
+
+  /* Texto da legenda */
+  #caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+  }
+
+  /* Botão de fechar */
+  .close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  /* Botão de fechar ao passar o mouse */
+  .close:hover, .close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+  }
+</style>
+
 </html>
