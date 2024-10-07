@@ -596,6 +596,19 @@ span.onclick = function() {
     padding: 0 15px;
   }
 }
+.logo img {
+  max-width: 100%;
+  height: auto;
+  width: auto;
+  max-height: 150px; /* Define uma altura máxima para garantir que não estique */
+}
+@media screen and (max-device-width: 767px) and (-webkit-min-device-pixel-ratio: 2) {
+  .logo img {
+    max-width: 100%;
+    height: auto;
+    max-height: 120px; /* Ajuste a altura máxima para iPhones */
+  }
+}
 
 </style>
 
