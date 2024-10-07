@@ -96,7 +96,8 @@ document.addEventListener("DOMContentLoaded", function() {
     function generatePopUps() {
         setInterval(() => {
             const name = generateUniqueName();
-            createPopUp(`${name} PAO FRANCES 9,99 $$`);
+            createPopUp(`${name} 
+                PAO FRANCES 9,99 $$`);
         }, 15000); // Novo pop-up a cada 3 segundos
     }
     
