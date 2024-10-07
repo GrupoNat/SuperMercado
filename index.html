@@ -310,7 +310,7 @@ https://templatemo.com/tm-562-space-dynamic
                 
                 <!-- Adicione um contêiner para a imagem em tela inteira -->
                 <div id="full-screen-image-container" style="display: none;">
-                  <img src="assets/images/sua-imagem-url.jpeg" id="full-screen-image" />
+                  <img src="assets/images/your-image-url.jpeg" id="full-screen-image" />
                 </div>
               </div>
             </div>
@@ -483,20 +483,21 @@ window.addEventListener('visibilitychange', () => {
 });
 
 const journalButton = document.getElementById('journal-button');
-const fullScreenImageContainer = document.getElementById('full-screen-image-container');
+  const fullScreenImageContainer = document.getElementById('full-screen-image-container');
 
-journalButton.addEventListener('click', () => {
-  fullScreenImageContainer.style.display = 'block'; /* mostre o contêiner */
-  document.body.style.overflow = 'hidden'; /* impida o rolagem */
-});
+  journalButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    fullScreenImageContainer.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  });
 
-// Adicione um ouvinte de eventos para fechar a imagem em tela inteira quando o usuário clica fora
-document.addEventListener('click', (event) => {
-  if (!fullScreenImageContainer.contains(event.target)) {
-    fullScreenImageContainer.style.display = 'none'; /* esconda o contêiner */
-    document.body.style.overflow = 'auto'; /* restaure a rolagem */
-  }
-});
+  // Adicione um evento para fechar a imagem em tela inteira quando o usuário clica fora
+  document.addEventListener('click', (event) => {
+    if (!fullScreenImageContainer.contains(event.target)) {
+      fullScreenImageContainer.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+  });
   </script>
   
 </body>
