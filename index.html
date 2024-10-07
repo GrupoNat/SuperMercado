@@ -238,7 +238,7 @@ https://templatemo.com/tm-562-space-dynamic
           <a href="https://mercadinhoze.catalog.kyte.site">
             <div class="item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.4s">
               <div class="hidden-content">
-                <h4>Tudo</h4>
+                <h4>TUDO!</h4>
                 <p>Tudo que voce Precisa</p>
               </div>
               <div class="showed-content">
@@ -305,7 +305,12 @@ https://templatemo.com/tm-562-space-dynamic
                 <a href="#"><h4>PROMOÇAO DE CARNE</h4></a>
                 <p>Lorem ipsum dolor sit amet, consectetur and sed doer ket eismod tempor incididunt ut labore et dolore magna...</p>
                 <div class="main-blue-button">
-                  <a href="#">JORNAL DO DIA </a>
+                  <a href="#" id="journal-button">JORNAL DO DIA</a>
+                </div>
+                
+                <!-- Adicione um contêiner para a imagem em tela inteira -->
+                <div id="full-screen-image-container" style="display: none;">
+                  <img src="assets/images/sua-imagem-url.jpeg" id="full-screen-image" />
                 </div>
               </div>
             </div>
@@ -475,6 +480,22 @@ toggleInstallButton();
 // Verifica se o usuário já tem o aplicativo instalado ao mudar o modo de exibição
 window.addEventListener('visibilitychange', () => {
   toggleInstallButton();
+});
+
+const journalButton = document.getElementById('journal-button');
+const fullScreenImageContainer = document.getElementById('full-screen-image-container');
+
+journalButton.addEventListener('click', () => {
+  fullScreenImageContainer.style.display = 'block'; /* mostre o contêiner */
+  document.body.style.overflow = 'hidden'; /* impida o rolagem */
+});
+
+// Adicione um ouvinte de eventos para fechar a imagem em tela inteira quando o usuário clica fora
+document.addEventListener('click', (event) => {
+  if (!fullScreenImageContainer.contains(event.target)) {
+    fullScreenImageContainer.style.display = 'none'; /* esconda o contêiner */
+    document.body.style.overflow = 'auto'; /* restaure a rolagem */
+  }
 });
   </script>
   
