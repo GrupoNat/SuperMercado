@@ -1,30 +1,28 @@
 let deferredPrompt;
 
 window.addEventListener('beforeinstallprompt', (e) => {
-  // Prevenir que o navegador exiba automaticamente o prompt
+  // Prevenir que o navegador exiba o prompt padrão
   e.preventDefault();
   deferredPrompt = e;
 
-  // Exibir o botão ou popup para o usuário
-  document.getElementById('install-button').style.display = 'block';
-});
-
-document.getElementById('install-button').addEventListener('click', () => {
-  // Quando o botão de instalação for clicado
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        console.log('Usuário aceitou a instalação do aplicativo');
-      } else {
-        console.log('Usuário recusou a instalação do aplicativo');
-      }
-      deferredPrompt = null;
-    });
-  }
+  // Definir um atraso para exibir automaticamente o prompt
+  setTimeout(() => {
+    if (deferredPrompt) {
+      // Exibir o prompt de instalação automaticamente
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('Usuário aceitou a instalação');
+        } else {
+          console.log('Usuário recusou a instalação');
+        }
+        deferredPrompt = null;
+      });
+    }
+  }, 3000); // Espera 3 segundos antes de mostrar o prompt
 });
 
 // Verificar se o app já está instalado
 if (window.matchMedia('(display-mode: standalone)').matches) {
-  document.getElementById('install-button').style.display = 'none';
+  console.log('Aplicativo já está instalado.');
 }
