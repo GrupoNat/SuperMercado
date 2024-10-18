@@ -41,7 +41,10 @@ https://templatemo.com/tm-562-space-dynamic
   </head>
 
 <body>
-
+  <div id="install-prompt-popup">
+    <p>Instale nosso aplicativo para uma melhor experiência!</p>
+    <button id="install-button">Instalar agora</button>
+  </div>
   <!-- ***** Preloader Start ***** -->
   <div id="js-preloader" class="js-preloader">
     <div class="preloader-inner">
@@ -596,8 +599,28 @@ span.onclick = function() {
     height: auto;
     max-height: 120px; /* Ajuste a altura máxima para iPhones */
   }
-}
 
+
+
+}
+#install-prompt-popup {
+      display: none; /* Inicialmente oculto */
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 20px;
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+    }
+    #install-prompt-popup button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
 </style>
 
 <div class="pop-ups">
