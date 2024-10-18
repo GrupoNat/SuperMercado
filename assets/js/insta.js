@@ -1,28 +1,34 @@
 let deferredPrompt;
 
+// Captura o evento 'beforeinstallprompt' para exibir a instalação do PWA
 window.addEventListener('beforeinstallprompt', (e) => {
-  // Prevenir que o navegador exiba o prompt padrão
-  e.preventDefault();
+  e.preventDefault(); // Evita que o prompt seja mostrado automaticamente
   deferredPrompt = e;
 
-  // Definir um atraso para exibir automaticamente o prompt
-  setTimeout(() => {
-    if (deferredPrompt) {
-      // Exibir o prompt de instalação automaticamente
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('Usuário aceitou a instalação');
-        } else {
-          console.log('Usuário recusou a instalação');
-        }
-        deferredPrompt = null;
-      });
-    }
-  }, 3000); // Espera 3 segundos antes de mostrar o prompt
+  // Espera uma leve interação do usuário (neste caso, scroll)
+  window.addEventListener('scroll', showInstallPrompt);
 });
 
-// Verificar se o app já está instalado
+function showInstallPrompt() {
+  if (deferredPrompt) {
+    // Remove o listener para evitar repetição
+    window.removeEventListener('scroll', showInstallPrompt);
+
+    // Exibe o prompt de instalação após uma interação
+    deferredPrompt.prompt();
+
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('Usuário aceitou a instalação');
+      } else {
+        console.log('Usuário recusou a instalação');
+      }
+      deferredPrompt = null;
+    });
+  }
+}
+
+// Verifica se o app já está instalado
 if (window.matchMedia('(display-mode: standalone)').matches) {
   console.log('Aplicativo já está instalado.');
 }
