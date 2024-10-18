@@ -5,8 +5,8 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="SUPERMERCADO NAYARA">
+    <meta name="author" content="RICHARD">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#ffffff">
@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="assets/css/animated.css">
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/popups.css">
+    <link rel="stylesheet" href="style.css">
 <!--
     
 TemplateMo 562 Space Dynamic
@@ -41,9 +42,15 @@ https://templatemo.com/tm-562-space-dynamic
   </head>
 
 <body>
-  <div id="install-prompt-popup">
-    <p>Instale nosso aplicativo para uma melhor experiência!</p>
-    <button id="install-button">Instalar agora</button>
+  <div id="install-prompt-banner">
+    <div style="display: flex; align-items: center;">
+      <img src="assets/icons/icon-192x192.png" alt="App Icon">
+      <p>Instale nosso aplicativo para uma melhor experiência!</p>
+    </div>
+    <div>
+      <button id="install-button">Instalar</button>
+      <button class="close-btn" id="close-banner">×</button>
+    </div>
   </div>
   <!-- ***** Preloader Start ***** -->
   <div id="js-preloader" class="js-preloader">
@@ -523,104 +530,7 @@ span.onclick = function() {
 
 <!-- CSS para o modal -->
 <style>
-  /* O Modal (fundo) */
-  .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1000; 
-    padding-top: 60px; 
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgba(0,0,0,0.9); 
-  }
-
-  /* Imagem dentro do modal */
-  .modal-content {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-  }
-
-  /* Texto da legenda */
-  #caption {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-    text-align: center;
-    color: #ccc;
-    padding: 10px 0;
-  }
-
-  /* Botão de fechar */
-  .close {
-    position: absolute;
-    top: 15px;
-    right: 35px;
-    color: #fff;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  /* Botão de fechar ao passar o mouse */
-  .close:hover, .close:focus {
-    color: #bbb;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  body {
-  padding: 10px;
-  margin: 0;
-}
-@media (max-width: 767px) {
-  .main-banner {
-    padding: 120px 10px;
-  }
-
-  .container {
-    padding: 0 15px;
-  }
-}
-.logo img {
-  max-width: 100%;
-  height: auto;
-  width: auto;
-  max-height: 150px; /* Define uma altura máxima para garantir que não estique */
-}
-@media screen and (max-device-width: 767px) and (-webkit-min-device-pixel-ratio: 2) {
-  .logo img {
-    max-width: 100%;
-    height: auto;
-    max-height: 120px; /* Ajuste a altura máxima para iPhones */
-  }
-
-
-
-}
-#install-prompt-popup {
-      display: none; /* Inicialmente oculto */
-      position: fixed;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      background-color: white;
-      padding: 20px;
-      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
-      z-index: 1000;
-    }
-    #install-prompt-popup button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-    }
+ 
 </style>
 
 <div class="pop-ups">

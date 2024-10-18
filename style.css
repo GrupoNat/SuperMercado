@@ -1,0 +1,124 @@
+/* O Modal (fundo) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+  }
+  
+  /* Imagem dentro do modal */
+  .modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+  }
+  
+  /* Texto da legenda */
+  #caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+  }
+  
+  /* Botão de fechar */
+  .close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  /* Botão de fechar ao passar o mouse */
+  .close:hover, .close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  body {
+    padding: 10px;
+    margin: 0;
+  }
+  
+  @media (max-width: 767px) {
+    .main-banner {
+      padding: 120px 10px;
+    }
+  
+    .container {
+      padding: 0 15px;
+    }
+  }
+  
+  .logo img {
+    max-width: 100%;
+    height: auto;
+    width: auto;
+    max-height: 150px; /* Define uma altura máxima para garantir que não estique */
+  }
+  
+  @media screen and (max-device-width: 767px) and (-webkit-min-device-pixel-ratio: 2) {
+    .logo img {
+      max-width: 100%;
+      height: auto;
+      max-height: 120px; /* Ajuste a altura máxima para iPhones */
+  }
+  
+  /* Estilo do banner de instalação */
+  #install-prompt-banner {
+    display: none; /* Inicialmente oculto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    padding: 15px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  #install-prompt-banner p {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+  }
+  
+  #install-prompt-banner img {
+    height: 24px;
+    width: 24px;
+    margin-right: 10px;
+  }
+  
+  #install-prompt-banner button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  #install-prompt-banner .close-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  } }
+  
