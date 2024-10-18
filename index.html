@@ -457,25 +457,21 @@ function isAppInstalled() {
     var span = document.getElementsByClassName("close")[0];
     var modalImg = document.getElementById("journalImage");
     var captionText = document.getElementById("caption");
+// Botão de clique para abrir o modal
+var btn = document.getElementById("journal-button");
 
-    // Quando o botão "Abrir Jornal" for clicado, o modal será exibido
-    btn.onclick = function() {
-      modal.style.display = "block";
-      modalImg.src = "assets/images/jornal-promocoes.jpeg"; // Caminho para a imagem do jornal
-      captionText.innerHTML = "Jornal de Promoções do Supermercado Nayara";
-    }
+// Quando o usuário clicar no botão, abra o modal e mostre a primeira imagem
+btn.onclick = function() {
+  modal.style.display = "block";
+  document.querySelector('.carousel-item').classList.add('active'); // Certifica que o primeiro item está ativo
+}
 
-    // Quando o botão "X" for clicado, o modal será fechado
-    span.onclick = function() {
-      modal.style.display = "none";
-    }
+// Fechar o modal quando clicar no botão "X"
+var span = document.getElementsByClassName("close")[0];
+span.onclick = function() {
+  modal.style.display = "none";
+}
 
-    // Fecha o modal se o usuário clicar fora da imagem/modal
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
   </script>
   
 </body>
