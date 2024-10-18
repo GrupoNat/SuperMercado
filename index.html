@@ -452,37 +452,7 @@ function isAppInstalled() {
 }
 
 // Mostra ou esconde o botão de instalação
-function toggleInstallButton() {
-  const installButton = document.getElementById('install-button');
-  if (isAppInstalled() || window.deferredPrompt) {
-    installButton.style.display = 'none';
-  } else {
-    installButton.style.display = 'block';
-  }
-}
 
-let deferredPrompt;
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  toggleInstallButton(); // Esconde o botão após a instalação
-});
-
-document.getElementById('install-button').addEventListener('click', () => {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice
-      .then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('Usuário aceitou a instalação do aplicativo');
-          window.location.reload(); // Recarrega a página após a instalação
-        } else {
-          console.log('Usuário recusou a instalação do aplicativo');
-        }
-      });
-  }
-});
 
 // Verifica se o usuário já tem o aplicativo instalado ao carregar a página
 toggleInstallButton();
@@ -497,16 +467,7 @@ var modal = document.getElementById("journalModal");
 var modalImg = document.getElementById("journalImage");
 var captionText = document.getElementById("caption");
 
-// Botão de clique para abrir o modal
-var btn = document.getElementById("journal-button");
-
-// Quando o usuário clicar no botão, abra o modal e mostre a imagem
-btn.onclick = function() {
-  modal.style.display = "block";
-  modalImg.src = "assets/images/jornal-promocoes.jpeg"; // Caminho para a imagem do jornal
-  captionText.innerHTML = "Jornal de Promoções do Supermercado Nayara";
-}
-
+// B  
 // Fechar o modal quando clicar no botão "X"
 var span = document.getElementsByClassName("close")[0];
 span.onclick = function() {
