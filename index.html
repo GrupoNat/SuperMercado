@@ -313,7 +313,6 @@ https://templatemo.com/tm-562-space-dynamic
         <div class="col-lg-6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.25s">
           <div class="left-image">
             <a href="#"><img src="assets/images/promo1.jpg" alt="Workspace Desktop"></a>
-            
             <div class="info">
               <div class="inner-content">
                 <ul>
@@ -492,7 +491,56 @@ function isAppInstalled() {
 
 <!-- CSS para o modal -->
 <style>
+ /* O Modal (fundo) */
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1000; 
+  padding-top: 30px; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0,0,0,0.9); 
+}
 
+/* Imagem dentro do modal */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 90%; /* Aumentar para 90% da largura da tela */
+  max-width: 2000px; /* Definir um tamanho máximo maior */
+}
+
+/* Texto da legenda */
+#caption {
+  margin: auto;
+  display: block;
+  width: 90%; /* Aumentar a largura da legenda */
+  max-width: 1200px; /* Mesma largura da imagem */
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+}
+
+/* Botão de fechar */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Botão de fechar ao passar o mouse */
+.close:hover, .close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
 </style>
 
 <div class="pop-ups">
