@@ -78,47 +78,49 @@
       max-height: 120px; /* Ajuste a altura máxima para iPhones */
   }
   
-  /* Estilo do banner de instalação */
   #install-prompt-banner {
     display: none; /* Inicialmente oculto */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #f8f9fa;
-    padding: 15px;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  #install-prompt-banner p {
-    margin: 0;
-    padding: 0;
-    font-size: 16px;
-  }
-  
-  #install-prompt-banner img {
-    height: 24px;
-    width: 24px;
-    margin-right: 10px;
-  }
-  
-  #install-prompt-banner button {
     background-color: #4CAF50;
     color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 4px;
+    padding: 15px;
+    text-align: center;
+    font-size: 16px;
+    z-index: 1000;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
   }
   
-  #install-prompt-banner .close-btn {
-    background: none;
+  /* Ícone de instalação */
+  #install-prompt-banner img {
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+
+  /* Botão para instalar */
+  #install-prompt-banner button {
+    background-color: white;
+    color: #4CAF50;
     border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  /* Botão de fechar */
+  #close-banner {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    background-color: transparent;
+    border: none;
+    color: white;
     font-size: 20px;
     cursor: pointer;
-  } }
-  
+  }
+
+  #close-banner:hover {
+    color: #ddd;
+  }}
