@@ -5,13 +5,16 @@ window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();  // Impede o prompt automático
   deferredPrompt = e;
 
-  // Exibe o banner após 3 segundos
-  setTimeout(() => {
-    document.getElementById('install-prompt-banner').style.display = 'block';
-  }, 3000);
+  // Verifica se o app já está instalado. Se não, exibe o banner
+  if (!window.matchMedia('(display-mode: standalone)').matches) {
+    // Exibe o banner após 3 segundos
+    setTimeout(() => {
+      document.getElementById('install-prompt-banner').style.display = 'block';
+    }, 3000);
+  }
 });
 
-// Ação para exibir o prompt de instalação quando o usuário clicar em "Instalar"
+// Ação para exibir o prompt de instalação quando o usuário clicar em "Instalar agora"
 document.getElementById('install-button').addEventListener('click', () => {
   if (deferredPrompt) {
     deferredPrompt.prompt();
@@ -34,7 +37,7 @@ document.getElementById('close-banner').addEventListener('click', () => {
   document.getElementById('install-prompt-banner').style.display = 'none';
 });
 
-// Verifica se o app já está instalado
+// Verifica se o app já está instalado ao carregar a página
 if (window.matchMedia('(display-mode: standalone)').matches) {
   console.log('Aplicativo já está instalado.');
 }
