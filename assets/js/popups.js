@@ -32,15 +32,10 @@ document.addEventListener("DOMContentLoaded", function() {
         setInterval(() => {
             const name = generateUniqueName();
             createPopUp(`${name} Acabou de baixar o APP NAYARA!`);
-        }, 10000); // Novo pop-up a cada 3 segundos
+        }, 100000); // Novo pop-up a cada 3 segundos
     }
     
-    function generatePopUps() {
-        setInterval(() => {
-            const name = generateUniqueName();
-            createPopUp(`${name} Esta Na loja Virtual Realizando uma Compra!`);
-        }, 10000); // Novo pop-up a cada 3 segundos
-    }
+  
   
     function setupPlanButtons() {
         document.getElementById('basicPlan').addEventListener('click', () => {
