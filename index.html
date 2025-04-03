@@ -19,7 +19,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/icon-180x180.png">
 <link rel="apple-touch-icon" sizes="192x192" href="/assets/images/icon-192x192.png">
 <link rel="apple-touch-icon" sizes="512x512" href="/assets/images/icon-512x512.png">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
     <title>NAYARA.APP</title>
 
     <!-- Bootstrap core CSS -->
@@ -199,19 +199,13 @@ https://templatemo.com/tm-562-space-dynamic
           </div>
         </div> 
       </div>
-      <div id="journalModal" class="modal">
-  <span class="close">&times;</span>
-  <div class="modal-content">
-    <div class="gallery">
-      <img src="assets/images/promo1.jpg" alt="Imagem 1">
-      <img src="assets/images/promo2.jpg" alt="Imagem 2">
-      <img src="assets/images/promo3.jpg" alt="Imagem 3">
-      <!-- Adicione mais imagens aqui -->
-    </div>
-  </div>
-           <!-- Modal (inicialmente oculto) -->
-  <div id="caption"></div>
-</div>
+      <div class="row">
+        <div class="col-lg-6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.25s">
+          <div class="left-image">
+            <a href="assets/images/promo1.jpg" data-lightbox="gallery" data-title="Imagem 1"><img src="assets/images/promo1.jpg" alt="Workspace Desktop"></a>
+            <a href="assets/images/promo2.jpg" data-lightbox="gallery" data-title="Imagem 2">
+              <a href="assets/images/promo3.jpg" data-lightbox="gallery" data-title="Imagem 2">
+            <div class="info">
               <div class="inner-content">
                 <ul>
                   <li><i class="fa fa-calendar"></i> VAL/ 24 Mar 2024</li>
@@ -219,10 +213,8 @@ https://templatemo.com/tm-562-space-dynamic
                   <li><i class="fa fa-folder"></i> 50% MAIS BAIXO</li>
                 </ul>
                 <a href="#"><h4>PROMOÇAO DE CARNE</h4></a>
-                <p>Lorem ipsum dolor sit amet, consectetur and sed doer ket eismod tempor incididunt ut labore et dolore magna...</p>
-                <div class="main-blue-button">
-                  <a  id="journal-button">ABRIR JORNAL</a>
-                </div>
+                <p>Clique No Jornal Para Ver Todas Nossas Ofertas !</p>
+               
                 
   <div id="portfolio" class="our-portfolio section">
     <div class="container">
@@ -397,8 +389,7 @@ https://templatemo.com/tm-562-space-dynamic
   <script src="assets/js/templatemo-custom.js"></script>
   <script src="assets/js/popups.js"></script>
   <script src="insta.js"></script>
-  <script src="./assets/js/adm.js"></script>
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
   <script>
 
     
@@ -508,100 +499,6 @@ function isAppInstalled() {
   text-decoration: none;
   cursor: pointer;
 }
-
-
-
-
-
-
-
-/* Galeria de imagens */
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 10px;
-}
-
-.gallery img {
-  width: 100%;
-  height: 150px;
-  margin: 10px;
-  cursor: pointer;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-}
-
-/* Modal */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  padding-top: 30px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.9);
-}
-
-.modal-content {
-  margin: auto;
-  display: block;
-  width: 90%;
-  max-width: 300px;
-  text-align: center;
-}
-
-#caption {
-  margin: auto;
-  display: block;
-  width: 90%;
-  max-width: 300px;
-  text-align: center;
-  color: #ccc;
-  padding: 10px 0;
-}
-
-.close {
-  position: absolute;
-  top: 15px;
-  right: 35px;
-  color: #fff;
-  font-size: 40px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.close:hover, .close:focus {
-  color: #bbb;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-/* Ajustes para celulares */
-@media only screen and (max-width: 768px) {
-  .gallery img {
-    width: 100%;
-    height: 200px;
-    margin: 5px;
-  }
-  .modal-content {
-    width: 80%;
-    max-width: 250px;
-  }
-  #caption {
-    width: 80%;
-    max-width: 250px;
-  }
-  .close {
-    top: 10px;
-    right: 20px;
-    font-size: 30px;
-  }
-}
-
 </style>
 
 <div class="pop-ups">
