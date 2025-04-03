@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
   document.addEventListener("DOMContentLoaded", function() {
-    const names=["PROMOCAÇÃO NA PADARIA"]
+    const names=["O dia N Esta Chegando !"]
     const popUpContainer = document.getElementById('popUpContainer');
     const maxNames = names.length;
     let usedNames = [];
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function() {
         setInterval(() => {
             const name = generateUniqueName();
             createPopUp(`${name} 
-                PAO FRANCES 9,99 $$`);
+                DATA:03/04/2025`);
         }, 15000); // Novo pop-up a cada 3 segundos
     }
     
